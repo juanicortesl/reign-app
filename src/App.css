@@ -1,2 +1,23 @@
 .App {
 }
+.App-Header {
+  width: 100vw;
+  height: 15vh;
+  line-height: 15vh;
+  box-shadow: 0 1px 4px 0 rgba(0, 21, 41, 0.12);
+  margin: 0;
+  padding: 0vh 10vw;
+  background-image: linear-gradient(to bottom, #ececec -32%, #fff 124%);
+}
+
+h1 {
+  font-family: Baskerville;
+  font-size: 1.75rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #3b3b3b;
+  text-transform: uppercase;
+  margin: 0;
+}
