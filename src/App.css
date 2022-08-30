@@ -1,7 +1,6 @@
 .App {
 }
 .App-Header {
-  width: 100vw;
   height: 15vh;
   line-height: 15vh;
   box-shadow: 0 1px 4px 0 rgba(0, 21, 41, 0.12);
@@ -10,6 +9,7 @@
   background-image: linear-gradient(to bottom, #ececec -32%, #fff 124%);
 }
 
+/* Text Styles */
 h1 {
   font-family: Baskerville;
   font-size: 1.75rem;
@@ -20,4 +20,83 @@ h1 {
   color: #3b3b3b;
   text-transform: uppercase;
   margin: 0;
+}
+h2 {
+  margin: 0;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  color: #6b6b6b;
+}
+
+p {
+  margin: 0;
+}
+
+/* Component Styles */
+.News-List {
+  padding: 5vh 10vw;
+  font-family: roboto;
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+.News-List-Wrapper {
+  display: grid;
+  grid-gap: 5%;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  background-color: #fff;
+  color: #444;
+}
+
+.News-Item {
+  color: #979797;
+  margin: 10px 0px;
+  opacity: 0.8;
+  border-radius: 6px;
+  border: solid 1px #979797;
+  background-color: #fff;
+  min-height: 80px;
+  display: flex;
+}
+.News-Item-Col-1 {
+  padding: 1rem;
+  width: 85%;
+}
+.News-Item-Col-2 {
+  width: 15%;
+  background-color: #6060601c;
+  position: relative;
+}
+.like-icon {
+  width: 1.5rem;
+  height: 1.375rem;
+}
+.clock-icon {
+  width: 1rem;
+  height: 1rem;
+}
+.img-frame {
+  width: 10%;
+  position: relative;
+}
+img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.News-Item-Info-Row {
+  display: flex;
+  font-size: 0.7rem;
+}
+.News-Title {
+  margin: 0.5rem;
 }

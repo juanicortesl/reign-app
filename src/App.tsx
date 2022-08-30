@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./logo.svg";
+import NewsList from "./NewsList/NewsList";
 import "./App.css";
 
 function App() {
@@ -8,6 +8,7 @@ function App() {
       <div className="App-Header">
         <h1>Hacker News</h1>
       </div>
+      <NewsList></NewsList>
     </div>
   );
 }
