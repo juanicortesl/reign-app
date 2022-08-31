@@ -5,11 +5,36 @@ interface Props {
 }
 
 function NewsItem({ data }: Props) {
+  const [isFavorite, setIsFavorite] = React.useState(false);
   const getHoursSince = (date: Date) => {
     const now = new Date().getTime();
     const hourInMilliseconds = 1000 * 60 * 60;
     return Math.round((now - date.getTime()) / hourInMilliseconds);
   };
+
+  const setFavorite = () => {
+    if (isFavorite) {
+      localStorage.removeItem(`favorite_story_id:${data.story_id}`);
+    } else {
+      localStorage.setItem(`favorite_story_id:${data.story_id}`, "favorite");
+    }
+    setIsFavorite(!isFavorite);
+  };
+
+  const checkSavedFavorites = async () => {
+    const savedFavorite = localStorage.getItem(
+      `favorite_story_id:${data.story_id}`
+    );
+    if (savedFavorite) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  };
+
+  React.useEffect(() => {
+    checkSavedFavorites();
+  }, [data]);
 
   return (
     <div className="News-Item">
@@ -31,8 +56,11 @@ function NewsItem({ data }: Props) {
       </div>
       <div className="News-Item-Col-2">
         <img
-          src={require("../img/iconmonstr-favorite-3@3x.png")}
+          src={require(isFavorite
+            ? "../img/iconmonstr-favorite-3@3x.png"
+            : "../img/iconmonstr-favorite-2@3x.png")}
           className="like-icon"
+          onClick={setFavorite}
         ></img>
       </div>
     </div>
