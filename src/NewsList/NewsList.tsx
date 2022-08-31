@@ -14,18 +14,20 @@ function NewsList() {
   const [maxPage, setMaxPage] = React.useState(50);
   const [favoritesSelected, setFavoritesSelected] = React.useState(false);
   const getNewsData = async () => {
-    console.log("getting news");
     const res = await fetch(
       `https://hn.algolia.com/api/v1/search_by_date?query=${selectedNews}&page=${
         selectedPage - 1
       }`
     );
     const json = await res.json();
-    setNewsData(json.hits);
+    setNewsData(
+      json.hits.filter((story: any) => {
+        return story.story_title && story.author && story.created_at;
+      })
+    );
     setMaxPage(json.nbPages);
   };
   const changeSelectedNews = (event: any) => {
-    console.log("changing news");
     setSelectedNews(event.target.value);
   };
   const selectPage = (page: any) => {
