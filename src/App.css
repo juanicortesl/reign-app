@@ -45,14 +45,14 @@ p {
 .News-List-Wrapper {
   display: grid;
   grid-gap: 5%;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   background-color: #fff;
   color: #444;
 }
 
 .News-Item {
   color: #979797;
-  margin: 10px 0px;
+  margin: 0px 0px;
   opacity: 0.8;
   border-radius: 6px;
   border: solid 1px #979797;
@@ -99,4 +99,13 @@ img {
 }
 .News-Title {
   margin: 0.5rem;
+}
+
+select {
+  width: 15rem;
+  height: 2rem;
+  border-radius: 4px;
+  border: solid 1px #2e2e2e;
+  background-color: #fff;
+  margin: 20px 0px;
 }
