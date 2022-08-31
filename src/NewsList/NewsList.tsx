@@ -1,8 +1,4 @@
 import React from "react";
-import {
-  convertCompilerOptionsFromJson,
-  textChangeRangeNewSpan,
-} from "typescript";
 import "../App.css";
 import NewsItem from "./NewsItem";
 
@@ -63,8 +59,15 @@ function NewsList() {
       }
     }
   };
+  const setFavoritesFilter = (filter: boolean) => {
+    setFavoritesSelected(filter);
+    localStorage.setItem("selected_filter", `${filter ? "favorites" : "all"}`);
+  };
   React.useEffect(() => {
     getNewsData();
+    localStorage.getItem("selected_filter") === "favorites"
+      ? setFavoritesSelected(true)
+      : setFavoritesSelected(false);
   }, [selectedNews, selectedPage]);
 
   return (
@@ -78,7 +81,7 @@ function NewsList() {
                 : "Selector Left"
             }
             onClick={() => {
-              setFavoritesSelected(false);
+              setFavoritesFilter(false);
             }}
           >
             All
@@ -90,7 +93,7 @@ function NewsList() {
                 : "Selector Right"
             }
             onClick={() => {
-              setFavoritesSelected(true);
+              setFavoritesFilter(true);
             }}
           >
             My Faves
