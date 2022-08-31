@@ -2,9 +2,10 @@ import React, { ReactNode } from "react";
 import "../App.css";
 interface Props {
   data: any;
+  favoritesSelected: boolean;
 }
 
-function NewsItem({ data }: Props) {
+function NewsItem({ data, favoritesSelected }: Props) {
   const [isFavorite, setIsFavorite] = React.useState(false);
   const getHoursSince = (date: Date) => {
     const now = new Date().getTime();
@@ -37,7 +38,7 @@ function NewsItem({ data }: Props) {
   }, [data]);
 
   return (
-    <div className="News-Item">
+    <div className={isFavorite || !favoritesSelected ? "News-Item" : "hidden"}>
       <div className="News-Item-Col-1">
         <div className="News-Item-Info-Row">
           <div className="img-frame">

@@ -12,6 +12,7 @@ function NewsList() {
   const [selectedPage, setSelectedPage] = React.useState(1);
   const [pages, setPages] = React.useState([1, 2, 3, 4, 5, 6, 7, "...", 50]);
   const [maxPage, setMaxPage] = React.useState(50);
+  const [favoritesSelected, setFavoritesSelected] = React.useState(false);
   const getNewsData = async () => {
     console.log("getting news");
     const res = await fetch(
@@ -67,6 +68,32 @@ function NewsList() {
   return (
     <div>
       <div className="News-List">
+        <div className="Favs-Selector">
+          <div
+            className={
+              !favoritesSelected
+                ? "Selector Left Selected-Selector"
+                : "Selector Left"
+            }
+            onClick={() => {
+              setFavoritesSelected(false);
+            }}
+          >
+            All
+          </div>
+          <div
+            className={
+              favoritesSelected
+                ? "Selector Right Selected-Selector"
+                : "Selector Right"
+            }
+            onClick={() => {
+              setFavoritesSelected(true);
+            }}
+          >
+            My Faves
+          </div>
+        </div>
         <div className="custom-select">
           <select
             placeholder="Select your news"
@@ -81,7 +108,13 @@ function NewsList() {
 
         <div className="News-List-Wrapper">
           {newsData.map((news, index) => {
-            return <NewsItem key={index} data={news}></NewsItem>;
+            return (
+              <NewsItem
+                key={index}
+                data={news}
+                favoritesSelected={favoritesSelected}
+              ></NewsItem>
+            );
           })}
         </div>
       </div>
