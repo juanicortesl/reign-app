@@ -7,6 +7,7 @@ interface Props {
 
 function NewsItem({ data, favoritesSelected }: Props) {
   const [isFavorite, setIsFavorite] = React.useState(false);
+  const [hovered, setHovered] = React.useState(false);
   const getHoursSince = (date: Date) => {
     const now = new Date().getTime();
     const hourInMilliseconds = 1000 * 60 * 60;
@@ -38,7 +39,15 @@ function NewsItem({ data, favoritesSelected }: Props) {
   }, [data]);
 
   return (
-    <div className={isFavorite || !favoritesSelected ? "News-Item" : "hidden"}>
+    <div
+      className={
+        isFavorite || !favoritesSelected
+          ? `News-Item ${hovered ? "Hovered-Item" : ""}`
+          : "hidden"
+      }
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div className="News-Item-Col-1">
         <div className="News-Item-Info-Row">
           <div className="img-frame">

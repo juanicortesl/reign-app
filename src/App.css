@@ -165,3 +165,7 @@ select {
 .hidden {
   display: none;
 }
+
+.Hovered-Item {
+  opacity: 0.4;
+}
