@@ -48,7 +48,12 @@ function NewsItem({ data, favoritesSelected }: Props) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="News-Item-Col-1">
+      <div
+        className="News-Item-Col-1"
+        onClick={() => {
+          window.open(data.story_url, "_blank", "noopener,noreferrer");
+        }}
+      >
         <div className="News-Item-Info-Row">
           <div className="img-frame">
             <img
