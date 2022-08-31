@@ -44,8 +44,8 @@ p {
 
 .News-List-Wrapper {
   display: grid;
-  grid-gap: 5%;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 0.8fr));
   background-color: #fff;
   color: #444;
 }
@@ -59,6 +59,12 @@ p {
   background-color: #fff;
   min-height: 80px;
   display: flex;
+  text-overflow: ellipsis;
+}
+.News-Title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-height: 2rem !important;
 }
 .News-Item-Col-1 {
   padding: 1rem;
