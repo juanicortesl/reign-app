@@ -9,39 +9,116 @@ import NewsItem from "./NewsItem";
 function NewsList() {
   const [newsData, setNewsData] = React.useState([]);
   const [selectedNews, setSelectedNews] = React.useState("");
+  const [selectedPage, setSelectedPage] = React.useState(1);
+  const [pages, setPages] = React.useState([1, 2, 3, 4, 5, 6, 7, "...", 50]);
+  const [maxPage, setMaxPage] = React.useState(50);
   const getNewsData = async () => {
     console.log("getting news");
     const res = await fetch(
-      `https://hn.algolia.com/api/v1/search_by_date?query=${selectedNews}&page=0`
+      `https://hn.algolia.com/api/v1/search_by_date?query=${selectedNews}&page=${
+        selectedPage - 1
+      }`
     );
     const json = await res.json();
     setNewsData(json.hits);
+    setMaxPage(json.nbPages);
   };
-  React.useEffect(() => {
-    getNewsData();
-  }, [selectedNews]);
   const changeSelectedNews = (event: any) => {
     console.log("changing news");
     setSelectedNews(event.target.value);
   };
-  return (
-    <div className="News-List">
-      <div className="custom-select">
-        <select
-          placeholder="Select your news"
-          value={selectedNews}
-          onChange={changeSelectedNews}
-        >
-          <option value="angular">Angular</option>
-          <option value="reactjs">React</option>
-          <option value="vuejs">VueJS</option>
-        </select>
-      </div>
+  const selectPage = (page: any) => {
+    if (page !== "...") {
+      setSelectedPage(Math.min(Math.max(parseInt(page), 1), maxPage));
+      if (page <= 5) {
+        setPages([1, 2, 3, 4, 5, 6, 7, "...", maxPage]);
+      } else if (page > 5 && page < maxPage - 7) {
+        setPages([
+          1,
+          2,
+          "...",
+          page - 1,
+          page,
+          page + 1,
+          "...",
+          maxPage - 1,
+          maxPage,
+        ]);
+      } else {
+        setPages([
+          1,
+          "...",
+          maxPage - 7,
+          maxPage - 6,
+          maxPage - 5,
+          maxPage - 4,
+          maxPage - 3,
+          maxPage - 2,
+          maxPage - 1,
+          maxPage,
+        ]);
+      }
+    }
+  };
+  React.useEffect(() => {
+    getNewsData();
+  }, [selectedNews, selectedPage]);
 
-      <div className="News-List-Wrapper">
-        {newsData.map((news, index) => {
-          return <NewsItem key={index} data={news}></NewsItem>;
+  return (
+    <div>
+      <div className="News-List">
+        <div className="custom-select">
+          <select
+            placeholder="Select your news"
+            value={selectedNews}
+            onChange={changeSelectedNews}
+          >
+            <option value="angular">Angular</option>
+            <option value="reactjs">React</option>
+            <option value="vuejs">VueJS</option>
+          </select>
+        </div>
+
+        <div className="News-List-Wrapper">
+          {newsData.map((news, index) => {
+            return <NewsItem key={index} data={news}></NewsItem>;
+          })}
+        </div>
+      </div>
+      <div className="Pagination-Row">
+        <div
+          className="Pagination-Item"
+          onClick={() => {
+            selectPage(selectedPage - 1);
+          }}
+        >
+          {"<"}
+        </div>
+        {pages.map((page, index) => {
+          return (
+            <div
+              className={
+                selectedPage === page
+                  ? "Pagination-Item selected"
+                  : "Pagination-Item"
+              }
+              key={index}
+              onClick={() => {
+                selectPage(page);
+              }}
+            >
+              {page}
+            </div>
+          );
         })}
+        <div
+          className="Pagination-Item"
+          onClick={() => {
+            selectPage(selectedPage + 1);
+          }}
+        >
+          {">"}
+        </div>
       </div>
     </div>
   );

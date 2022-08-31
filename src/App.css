@@ -38,7 +38,7 @@ p {
 .News-List {
   padding: 5vh 10vw;
   font-family: roboto;
-  height: 70vh;
+  height: 65vh;
   overflow-y: scroll;
 }
 
@@ -99,6 +99,27 @@ img {
 }
 .News-Title {
   margin: 0.5rem;
+}
+.Pagination-Row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0px;
+}
+.Pagination-Item {
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  margin: 0 0.5rem 0 0;
+  border-radius: 6px;
+  border: solid 1px #d9d9d9;
+  background-color: #fff;
+}
+.selected {
+  color: #fff;
+  background-color: #1890ff;
 }
 
 select {
